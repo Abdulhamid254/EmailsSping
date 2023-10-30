@@ -10,8 +10,8 @@ SERVER_PORT: 8080
 ACTIVE_PROFILE: prod
 
 #Email Config
-#EMAIL_HOST: smtp.gmail.com
-#EMAIL_PORT: 587
-#EMAIL_ID: <YOUR EMAIL ADDRESS>
-#EMAIL_PASSWORD: <YOUR PASSWORD>
-#VERIFY_EMAIL_HOST: http://localhost:${SERVER_PORT}
+EMAIL_HOST: smtp.gmail.com
+EMAIL_PORT: 587
+EMAIL_ID: nassurabdulhamid49@gmail.com
+EMAIL_PASSWORD: rork thoj yvwb dpij
+VERIFY_EMAIL_HOST: http://localhost:${SERVER_PORT}
