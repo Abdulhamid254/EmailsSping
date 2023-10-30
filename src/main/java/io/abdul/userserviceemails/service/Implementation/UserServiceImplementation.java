@@ -34,7 +34,7 @@ public class UserServiceImplementation implements UserService {
         User user = userRepository.findByEmailIgnoreCase(confirmation.getUser().getEmail());
         user.setEnabled(true);
         userRepository.save(user);
-        // confirmationRepository.delete(confirmation)
+        // confirmationRepository.delete(confirmation) // DELETING THE CONFIRMATION
         return Boolean.TRUE;
     }
 }
