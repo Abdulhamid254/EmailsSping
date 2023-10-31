@@ -4,6 +4,7 @@ import io.abdul.userserviceemails.domain.Confirmation;
 import io.abdul.userserviceemails.domain.User;
 import io.abdul.userserviceemails.repository.ConfirmationRepository;
 import io.abdul.userserviceemails.repository.UserRepository;
+import io.abdul.userserviceemails.service.EmailService;
 import io.abdul.userserviceemails.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImplementation implements UserService {
     private final UserRepository userRepository; // dependency injection
     private final ConfirmationRepository confirmationRepository;
+    private  final EmailService emailService;
     @Override
     public User saveUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) { throw new RuntimeException("Email already exists!!");}
@@ -25,6 +27,7 @@ public class UserServiceImplementation implements UserService {
         confirmationRepository.save(confirmation);
 
         //TODO send email to user with token
+        emailService.sendSimpleMailMessage(user.getName(), user.getEmail(),confirmation.getToken());
         return user;
     }
 

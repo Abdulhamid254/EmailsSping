@@ -3,6 +3,7 @@ package io.abdul.userserviceemails.service.Implementation;
 import io.abdul.userserviceemails.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 
 public class EmailServiceImplementation implements EmailService {
+    private static final String NEW_USER_ACCOUNT_VERIFICATION = "New User Account Verification";
     @Value("${spring.mail.verify.host}")
     private String host;
     @Value("${spring.mail.username}")
@@ -19,6 +21,17 @@ public class EmailServiceImplementation implements EmailService {
 
     @Override
     public void sendSimpleMailMessage(String name, String to, String token) {
+       try {
+           SimpleMailMessage message = new SimpleMailMessage();
+           message.setSubject(NEW_USER_ACCOUNT_VERIFICATION);
+           message.setFrom(fromEmail);
+           message.setTo(to);
+           message.setText("Hey this is working!!");
+           emailSender.send(message);
+       }catch(Exception exception) {
+           System.out.println(exception.getMessage());
+           throw new RuntimeException(exception.getMessage());
+       }
 
     }
 
